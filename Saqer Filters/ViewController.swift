@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
 //    var Fimage: UIImage?
     
@@ -76,5 +76,44 @@ class ViewController: UIViewController {
             }
         }
     }
+    @IBAction func onNewPhoto(_ sender: Any) {
+        let ActionSheet = UIAlertController(title: "New Photo", message: nil, preferredStyle: .actionSheet)
+        ActionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {action in self.showCamera()}))
+        ActionSheet.addAction(UIAlertAction(title: "Album", style: .default, handler: {action in self.showAlbum()}))
+        ActionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(ActionSheet, animated: true, completion: nil)
+    }
+    
+    func showCamera(){
+        let camarePicker = UIImagePickerController()
+        camarePicker.delegate = self
+        camarePicker.sourceType = .camera
+        
+        present(camarePicker, animated: true, completion: nil)
+    }
+    func showAlbum(){
+        let camarePicker = UIImagePickerController()
+        camarePicker.delegate = self
+        camarePicker.sourceType = .photoLibrary
+        
+        present(camarePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        dismiss(animated: true, completion: nil)
+        if let image = info[.originalImage] as? UIImage {
+         ImageView.image = image
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func onShare(_ sender: Any) {
+       let activityControl = UIActivityViewController(activityItems: [ImageView.image!], applicationActivities: nil)
+        present(activityControl, animated: true, completion: nil)
+    }
+    
 }
 

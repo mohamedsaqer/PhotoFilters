@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D39985EB221D87CF007D0659 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39985EA221D87CF007D0659 /* TableViewController.swift */; };
 		D3CDB198221B159C00160FAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CDB197221B159C00160FAA /* AppDelegate.swift */; };
 		D3CDB19A221B159C00160FAA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CDB199221B159C00160FAA /* ViewController.swift */; };
 		D3CDB19D221B159C00160FAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3CDB19B221B159C00160FAA /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D39985EA221D87CF007D0659 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		D3CDB194221B159C00160FAA /* Saqer Filters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Saqer Filters.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3CDB197221B159C00160FAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3CDB199221B159C00160FAA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				D3CDB197221B159C00160FAA /* AppDelegate.swift */,
 				D3CDB199221B159C00160FAA /* ViewController.swift */,
+				D39985EA221D87CF007D0659 /* TableViewController.swift */,
 				D3CDB19B221B159C00160FAA /* Main.storyboard */,
 				D3CDB19E221B15A100160FAA /* Assets.xcassets */,
 				D3CDB1A0221B15A100160FAA /* LaunchScreen.storyboard */,
@@ -274,6 +277,7 @@
 				D3CDB19A221B159C00160FAA /* ViewController.swift in Sources */,
 				D3CDB1CB221B388700160FAA /* RGBAImage.swift in Sources */,
 				D3CDB1CE221B388700160FAA /* Brightness.swift in Sources */,
+				D39985EB221D87CF007D0659 /* TableViewController.swift in Sources */,
 				D3CDB1CD221B388700160FAA /* Rosa.swift in Sources */,
 				D3CDB1CC221B388700160FAA /* GrayScale.swift in Sources */,
 				D3CDB198221B159C00160FAA /* AppDelegate.swift in Sources */,
