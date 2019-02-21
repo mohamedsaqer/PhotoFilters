@@ -10,35 +10,57 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-//    var Fimage: UIImage?
+    var Fimage: UIImage?
     
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet var secondryMenu: UIView!
     @IBOutlet weak var bottomMenu: UIView!
     @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var compareButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
- //       let image = UIImage(named: "sample")
-        // Process the image!
-//        let myRGBA = RGBAImage(image: image!)!.toUIImage()
-//
-//        let BW = GrayScale(image: image!)!.convertImageToBW(image: image!)
-//
-//
-//        let ROSAY = Rosa(image: image!, factor: 555)?.toUIImage()
-//        let GREENY = Rosa(image: image!, factor: -55)?.toUIImage()
-//
-//        let BROWNY = Penceil(image: image!)?.toUIImage()
-//        let MYIMAGE = Brightness(image: image!, contrast: 0.35, brightness: 0.44)?.toUIImage()
-//
-//        Fimage = BW
+        compareButton.isEnabled = false
         secondryMenu.translatesAutoresizingMaskIntoConstraints = false
         secondryMenu.backgroundColor = UIColor.init(white: 0.5, alpha: 0.5)
     }
+    
+    func save(){
+        guard let selectedImage = ImageView.image else{
+            print("Imagee not Found")
+            return
+        }
+        UIImageWriteToSavedPhotosAlbum(selectedImage, self, nil, nil)
+    }
+    @IBAction func onRosay(_ sender: UIButton) {
+//        if(!sender.isSelected){
+            compareButton.isEnabled = true
+            ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()
+//            sender.isSelected = true
+//        }else{
+//            ImageView.image = Fimage
+//            sender.isSelected = false
+//        }
+    }
+    @IBAction func onGreeny(_ sender: Any) {
+        compareButton.isEnabled = true
+        ImageView.image = Rosa(image: Fimage!, factor: -55)?.toUIImage()
+    }
+    @IBAction func onBrowny(_ sender: Any) {
+        compareButton.isEnabled = true
+        ImageView.image = Penceil(image: Fimage!)?.toUIImage()
+    }
+    @IBAction func onGray(_ sender: Any) {
+        compareButton.isEnabled = true
+        ImageView.image = GrayScale(image: Fimage!)!.convertImageToBW(image: Fimage!)
+    }
+    @IBAction func onBrightness(_ sender: Any) {
+        compareButton.isEnabled = true
+        ImageView.image = Brightness(image: Fimage!, contrast: 0.35, brightness: 0.44)?.toUIImage()
+    }
     @IBAction func onFilter(_ sender: UIButton) {
+        Fimage = ImageView.image
         if(sender.isSelected){
             hideSeconryMenu()
             sender.isSelected = false
@@ -77,6 +99,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     @IBAction func onNewPhoto(_ sender: Any) {
+        hideSeconryMenu()
+        filterButton.isSelected = false
         let ActionSheet = UIAlertController(title: "New Photo", message: nil, preferredStyle: .actionSheet)
         ActionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {action in self.showCamera()}))
         ActionSheet.addAction(UIAlertAction(title: "Album", style: .default, handler: {action in self.showAlbum()}))
@@ -113,6 +137,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func onShare(_ sender: Any) {
        let activityControl = UIActivityViewController(activityItems: [ImageView.image!], applicationActivities: nil)
         present(activityControl, animated: true, completion: nil)
+    }
+    @IBAction func onCompare(_ sender: UIButton) {
+        if(!sender.isSelected){
+            sender.isSelected = true
+            ImageView.image = Fimage
+        }else{
+            sender.isSelected = false
+            ImageView.image = GrayScale(image: Fimage!)!.convertImageToBW(image: Fimage!)
+        }
     }
     
 }
