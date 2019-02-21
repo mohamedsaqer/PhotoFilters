@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var Fimage: UIImage?
+    var filtername = ""
     
     @IBOutlet weak var ImageView: UIImageView!
     @IBOutlet var secondryMenu: UIView!
@@ -24,40 +25,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         compareButton.isEnabled = false
         secondryMenu.translatesAutoresizingMaskIntoConstraints = false
         secondryMenu.backgroundColor = UIColor.init(white: 0.5, alpha: 0.5)
+        ImageView.isUserInteractionEnabled = true
     }
     
-    func save(){
-        guard let selectedImage = ImageView.image else{
-            print("Imagee not Found")
-            return
-        }
-        UIImageWriteToSavedPhotosAlbum(selectedImage, self, nil, nil)
-    }
+
     @IBAction func onRosay(_ sender: UIButton) {
-//        if(!sender.isSelected){
-            compareButton.isEnabled = true
-            ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()
-//            sender.isSelected = true
-//        }else{
-//            ImageView.image = Fimage
-//            sender.isSelected = false
-//        }
+        compareButton.isEnabled = true
+        compareButton.isSelected = false
+        ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()
+        filtername = "rosay"
+        
     }
     @IBAction func onGreeny(_ sender: Any) {
         compareButton.isEnabled = true
+        compareButton.isSelected = false
         ImageView.image = Rosa(image: Fimage!, factor: -55)?.toUIImage()
+        filtername = "greeny"
     }
     @IBAction func onBrowny(_ sender: Any) {
         compareButton.isEnabled = true
+        compareButton.isSelected = false
         ImageView.image = Penceil(image: Fimage!)?.toUIImage()
+        filtername = "browny"
     }
     @IBAction func onGray(_ sender: Any) {
         compareButton.isEnabled = true
+        compareButton.isSelected = false
         ImageView.image = GrayScale(image: Fimage!)!.convertImageToBW(image: Fimage!)
+        filtername = "gray"
     }
     @IBAction func onBrightness(_ sender: Any) {
         compareButton.isEnabled = true
+        compareButton.isSelected = false
         ImageView.image = Brightness(image: Fimage!, contrast: 0.35, brightness: 0.44)?.toUIImage()
+        filtername = "dark"
     }
     @IBAction func onFilter(_ sender: UIButton) {
         Fimage = ImageView.image
@@ -99,8 +100,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     @IBAction func onNewPhoto(_ sender: Any) {
-        hideSeconryMenu()
-        filterButton.isSelected = false
+        compareButton.isSelected = false
         let ActionSheet = UIAlertController(title: "New Photo", message: nil, preferredStyle: .actionSheet)
         ActionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {action in self.showCamera()}))
         ActionSheet.addAction(UIAlertAction(title: "Album", style: .default, handler: {action in self.showAlbum()}))
@@ -128,6 +128,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
          ImageView.image = image
+         hideSeconryMenu()
+         filterButton.isSelected = false
+         compareButton.isEnabled = false
         }
     }
     
@@ -144,7 +147,51 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             ImageView.image = Fimage
         }else{
             sender.isSelected = false
-            ImageView.image = GrayScale(image: Fimage!)!.convertImageToBW(image: Fimage!)
+            switch filtername{
+            case "rosay":
+            ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()
+                break
+            case "browny":
+                ImageView.image = Penceil(image: Fimage!)?.toUIImage()
+                break
+            case "gray":
+                ImageView.image = GrayScale(image: Fimage!)!.convertImageToBW(image: Fimage!)
+                break
+            case "greeny":
+                ImageView.image = Rosa(image: Fimage!, factor: -55)?.toUIImage()
+                break
+            case "dark":
+                ImageView.image = Brightness(image: Fimage!, contrast: 0.35, brightness: 0.44)?.toUIImage()
+                break
+            default:
+                ImageView.image = Fimage
+            }
+        }
+    }
+    @IBAction func onTouch(_ sender: UIGestureRecognizer) {
+        print(filtername)
+        if(!filterButton.isSelected){
+            switch filtername{
+            case "rosay":
+                ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()
+                break
+            case "browny":
+                ImageView.image = Penceil(image: Fimage!)?.toUIImage()
+                break
+            case "gray":
+                ImageView.image = GrayScale(image: Fimage!)!.convertImageToBW(image: Fimage!)
+                break
+            case "greeny":
+                ImageView.image = Rosa(image: Fimage!, factor: -55)?.toUIImage()
+                break
+            case "dark":
+                ImageView.image = Brightness(image: Fimage!, contrast: 0.35, brightness: 0.44)?.toUIImage()
+                break
+            default:
+                ImageView.image = Fimage
+            }
+        }else{
+            ImageView.image = Fimage
         }
     }
     

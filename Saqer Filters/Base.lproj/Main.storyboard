@@ -21,6 +21,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sample" translatesAutoresizingMaskIntoConstraints="NO" id="ucd-bC-QDv">
                                 <rect key="frame" x="0.0" y="24" width="1024" height="1267"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ykh-5S-JuM" appends="YES" id="fT3-bL-WPD"/>
+                                </connections>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMY-Vx-R9i">
                                 <rect key="frame" x="0.0" y="1306" width="1024" height="30"/>
@@ -215,6 +219,11 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="zeg-vW-2ca"/>
                 </view>
+                <tapGestureRecognizer id="ykh-5S-JuM" customClass="View">
+                    <connections>
+                        <action selector="onTouch:" destination="BYZ-38-t0r" id="OVZ-ke-UqE"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="133.59375" y="133.52855051244509"/>
         </scene>
