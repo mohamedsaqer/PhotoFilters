@@ -18,6 +18,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomMenu: UIView!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var compareButton: UIButton!
+    @IBOutlet weak var overallyImageview: UIImageView!
+    @IBOutlet weak var OriginalLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -27,6 +29,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         secondryMenu.backgroundColor = UIColor.init(white: 0.5, alpha: 0.5)
         ImageView.isUserInteractionEnabled = true
         Fimage = ImageView.image
+        overallyImageview.isHidden = false
+        overallyImageview.image = Fimage
+        OriginalLabel.isHidden = false
     }
     
 
@@ -35,31 +40,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         compareButton.isSelected = false
         ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()
         filtername = "rosay"
-        
+        overallyImageview.isHidden = true
+        OriginalLabel.isHidden = true
     }
     @IBAction func onGreeny(_ sender: Any) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
         ImageView.image = Rosa(image: Fimage!, factor: -55)?.toUIImage()
         filtername = "greeny"
+        overallyImageview.isHidden = true
+        OriginalLabel.isHidden = true
     }
     @IBAction func onBrowny(_ sender: Any) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
         ImageView.image = Penceil(image: Fimage!)?.toUIImage()
         filtername = "browny"
+        overallyImageview.isHidden = true
+        OriginalLabel.isHidden = true
     }
     @IBAction func onGray(_ sender: Any) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
         ImageView.image = GrayScale(image: Fimage!)!.convertImageToBW(image: Fimage!)
         filtername = "gray"
+        overallyImageview.isHidden = true
+        OriginalLabel.isHidden = true
     }
     @IBAction func onBrightness(_ sender: Any) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
         ImageView.image = Brightness(image: Fimage!, contrast: 0.35, brightness: 0.44)?.toUIImage()
         filtername = "dark"
+        overallyImageview.isHidden = true
+        OriginalLabel.isHidden = true
     }
     @IBAction func onFilter(_ sender: UIButton) {
         Fimage = ImageView.image
@@ -129,6 +143,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
          ImageView.image = image
+         overallyImageview.image = image
+         overallyImageview.isHidden = false
+         OriginalLabel.isHidden = false
          Fimage = image
          hideSeconryMenu()
          filterButton.isSelected = false
@@ -147,7 +164,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if(!sender.isSelected){
             sender.isSelected = true
             ImageView.image = Fimage
+            overallyImageview.isHidden = false
+            OriginalLabel.isHidden = false
         }else{
+            overallyImageview.isHidden = true
+            OriginalLabel.isHidden = true
             sender.isSelected = false
             switch filtername{
             case "rosay":
@@ -171,22 +192,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-    class InstantPanGestureRecognizer: UIPanGestureRecognizer {
-        
-        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-            if (self.state == UIGestureRecognizer.State.began) { return }
-            super.touchesBegan(touches, with: event)
-            self.state = UIGestureRecognizer.State.began
-        }
-        
-    }
+//    class InstantPanGestureRecognizer: UIPanGestureRecognizer {
+//
+//        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+//            if (self.state == UIGestureRecognizer.State.began) { return }
+//            super.touchesBegan(touches, with: event)
+//            self.state = UIGestureRecognizer.State.began
+//        }
+//
+//    }
     
     @IBAction func onTap(recognizer: UIPanGestureRecognizer) {
         if recognizer.state == UIPanGestureRecognizer.State.began{
             ImageView.image = Fimage
+            overallyImageview.isHidden = false
+            OriginalLabel.isHidden = false
         }
         if recognizer.state == UIPanGestureRecognizer.State.ended {
             if(compareButton.isEnabled){
+                overallyImageview.isHidden = true
+                OriginalLabel.isHidden = true
             switch filtername{
             case "rosay":
                 ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()

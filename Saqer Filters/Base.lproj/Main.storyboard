@@ -145,11 +145,18 @@
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="41g-vh-iY5" userLabel="Original">
                                 <rect key="frame" x="314" y="20" width="100" height="150"/>
+                                <accessibility key="accessibilityConfiguration" label="Original"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="5hF-qD-PAc"/>
                                     <constraint firstAttribute="width" constant="100" id="yaI-cB-dXc"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVu-8x-coU">
+                                <rect key="frame" x="345" y="85" width="59" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -159,17 +166,23 @@
                             <constraint firstItem="41g-vh-iY5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="SGm-QI-gtU"/>
                             <constraint firstItem="ucd-bC-QDv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="U2B-Y6-HqM"/>
                             <constraint firstItem="DMY-Vx-R9i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W2a-bL-b4R"/>
+                            <constraint firstItem="SVu-8x-coU" firstAttribute="centerY" secondItem="41g-vh-iY5" secondAttribute="centerY" id="aHb-cy-MdA"/>
                             <constraint firstItem="ucd-bC-QDv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ffB-xb-UIR"/>
                             <constraint firstItem="DMY-Vx-R9i" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="iyM-QA-MW1"/>
+                            <constraint firstItem="SVu-8x-coU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="65" id="lN0-nn-3Sk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SVu-8x-coU" secondAttribute="trailing" constant="10" id="svc-oK-Buz"/>
+                            <constraint firstItem="SVu-8x-coU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="vSN-MI-mJV"/>
                             <constraint firstItem="ucd-bC-QDv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zT7-vo-RqK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="ImageView" destination="ucd-bC-QDv" id="84y-0N-jBH"/>
+                        <outlet property="OriginalLabel" destination="SVu-8x-coU" id="uZi-4Y-wf4"/>
                         <outlet property="bottomMenu" destination="DMY-Vx-R9i" id="f7M-gD-4uU"/>
                         <outlet property="compareButton" destination="hog-a6-ZQN" id="wJS-Z4-miq"/>
                         <outlet property="filterButton" destination="n1e-hu-rjH" id="I4l-HI-vmu"/>
+                        <outlet property="overallyImageview" destination="41g-vh-iY5" id="iYq-4q-Z43"/>
                         <outlet property="secondryMenu" destination="IXO-cl-NlV" id="8Hy-A4-f6S"/>
                     </connections>
                 </viewController>
