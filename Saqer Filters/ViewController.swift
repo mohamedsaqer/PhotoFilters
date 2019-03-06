@@ -26,6 +26,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         secondryMenu.translatesAutoresizingMaskIntoConstraints = false
         secondryMenu.backgroundColor = UIColor.init(white: 0.5, alpha: 0.5)
         ImageView.isUserInteractionEnabled = true
+        Fimage = ImageView.image
     }
     
 
@@ -128,6 +129,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true, completion: nil)
         if let image = info[.originalImage] as? UIImage {
          ImageView.image = image
+         Fimage = image
          hideSeconryMenu()
          filterButton.isSelected = false
          compareButton.isEnabled = false
@@ -168,9 +170,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
-    @IBAction func onTouch(_ sender: UIGestureRecognizer) {
-        print(filtername)
-        if(!filterButton.isSelected){
+
+    class InstantPanGestureRecognizer: UIPanGestureRecognizer {
+        
+        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+            if (self.state == UIGestureRecognizer.State.began) { return }
+            super.touchesBegan(touches, with: event)
+            self.state = UIGestureRecognizer.State.began
+        }
+        
+    }
+    
+    @IBAction func onTap(recognizer: UIPanGestureRecognizer) {
+        if recognizer.state == UIPanGestureRecognizer.State.began{
+            ImageView.image = Fimage
+        }
+        if recognizer.state == UIPanGestureRecognizer.State.ended {
+            if(compareButton.isEnabled){
             switch filtername{
             case "rosay":
                 ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()
@@ -190,10 +206,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             default:
                 ImageView.image = Fimage
             }
-        }else{
-            ImageView.image = Fimage
         }
     }
-    
+  }
 }
 
