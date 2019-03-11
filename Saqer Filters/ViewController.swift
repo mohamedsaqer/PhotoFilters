@@ -20,6 +20,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var compareButton: UIButton!
     @IBOutlet weak var overallyImageview: UIImageView!
     @IBOutlet weak var OriginalLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var editSlider: UISlider!
     
     
     override func viewDidLoad() {
@@ -38,51 +40,63 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func onRosay(_ sender: UIButton) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
-        ImageView.image = Rosa(image: Fimage!, factor: 555)?.toUIImage()
+        ImageView.image = Rosa(image: overallyImageview.image!, factor: 555)?.toUIImage()
         filtername = "rosay"
         overallyImageview.isHidden = true
         OriginalLabel.isHidden = true
+        editButton.isEnabled = true
+        editSlider.value = 1
     }
     @IBAction func onGreeny(_ sender: Any) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
-        ImageView.image = Rosa(image: Fimage!, factor: -55)?.toUIImage()
+        ImageView.image = Rosa(image: overallyImageview.image!, factor: -55)?.toUIImage()
         filtername = "greeny"
         overallyImageview.isHidden = true
         OriginalLabel.isHidden = true
+        editButton.isEnabled = true
+        editSlider.value = 1
     }
     @IBAction func onBrowny(_ sender: Any) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
-        ImageView.image = Penceil(image: Fimage!)?.toUIImage()
+        ImageView.image = Penceil(image: overallyImageview.image!)?.toUIImage()
         filtername = "browny"
         overallyImageview.isHidden = true
         OriginalLabel.isHidden = true
+        editButton.isEnabled = true
+        editSlider.value = 1
     }
     @IBAction func onGray(_ sender: Any) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
-        ImageView.image = GrayScale(image: Fimage!)!.convertImageToBW(image: Fimage!)
+        ImageView.image = GrayScale(image: overallyImageview.image!)!.convertImageToBW(image: Fimage!)
         filtername = "gray"
         overallyImageview.isHidden = true
         OriginalLabel.isHidden = true
+        editButton.isEnabled = true
+        editSlider.value = 1
     }
     @IBAction func onBrightness(_ sender: Any) {
         compareButton.isEnabled = true
         compareButton.isSelected = false
-        ImageView.image = Brightness(image: Fimage!, contrast: 0.35, brightness: 0.44)?.toUIImage()
+        ImageView.image = Brightness(image: overallyImageview.image!, contrast: 0.35, brightness: 0.44)?.toUIImage()
         filtername = "dark"
         overallyImageview.isHidden = true
         OriginalLabel.isHidden = true
+        editButton.isEnabled = true
+        editSlider.value = 1
     }
     @IBAction func onFilter(_ sender: UIButton) {
         Fimage = ImageView.image
         if(sender.isSelected){
             hideSeconryMenu()
             sender.isSelected = false
+//            editSlider.isHidden = false
         }else{
             showSecondryMenu()
             sender.isSelected = true
+            editSlider.isHidden = true
         }
     }
     
@@ -150,6 +164,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
          hideSeconryMenu()
          filterButton.isSelected = false
          compareButton.isEnabled = false
+         editSlider.isHidden = true
+         editButton.isEnabled = false
         }
     }
     
@@ -163,7 +179,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func onCompare(_ sender: UIButton) {
         if(!sender.isSelected){
             sender.isSelected = true
-            ImageView.image = Fimage
+            ImageView.image = overallyImageview.image
             overallyImageview.isHidden = false
             OriginalLabel.isHidden = false
         }else{
@@ -191,24 +207,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
-
-//    class InstantPanGestureRecognizer: UIPanGestureRecognizer {
-//
-//        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-//            if (self.state == UIGestureRecognizer.State.began) { return }
-//            super.touchesBegan(touches, with: event)
-//            self.state = UIGestureRecognizer.State.began
-//        }
-//
-//    }
     
-    @IBAction func onTap(recognizer: UIPanGestureRecognizer) {
-        if recognizer.state == UIPanGestureRecognizer.State.began{
-            ImageView.image = Fimage
+    @IBAction func onTap(recognizer: UILongPressGestureRecognizer) {
+        if recognizer.state == UILongPressGestureRecognizer.State.began{
+            ImageView.image = overallyImageview.image
             overallyImageview.isHidden = false
             OriginalLabel.isHidden = false
         }
-        if recognizer.state == UIPanGestureRecognizer.State.ended {
+        if recognizer.state == UILongPressGestureRecognizer.State.ended {
             if(compareButton.isEnabled){
                 overallyImageview.isHidden = true
                 OriginalLabel.isHidden = true
@@ -234,5 +240,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
   }
+    @IBAction func onEdit(_ sender: UIButton) {
+        filterButton.isSelected = false
+        hideSeconryMenu()
+        editSlider.isHidden = false
+    }
+    @IBAction func onSlider(_ sender: UISlider) {
+        let o = Int(sender.value)
+        switch filtername{
+        case "rosay":
+            ImageView.image = Rosa(image: Fimage!, factor: ( o ))?.toUIImage()
+            break
+        case "browny":
+            ImageView.image = Penceil(image: overallyImageview.image!)?.toUIImage()
+            break
+        case "gray":
+            ImageView.image = GrayScale(image: overallyImageview.image!)!.convertImageToBW(image: Fimage!)
+            break
+        case "greeny":
+            ImageView.image = Rosa(image: overallyImageview.image!, factor: (o - 155) )?.toUIImage()
+            break
+        case "dark":
+            ImageView.image = Brightness(image: overallyImageview.image!, contrast: ( (Double(o/60)) ), brightness: ( (Double(o/100)) ))?.toUIImage()
+            break
+        default:
+            ImageView.image = Fimage
+        }
+    }
+    
 }
 

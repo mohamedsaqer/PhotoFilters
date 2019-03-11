@@ -24,6 +24,7 @@
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="XOP-XB-gdc" appends="YES" id="GOO-y3-Uwb"/>
+                                    <outletCollection property="gestureRecognizers" destination="bLr-We-qzO" appends="YES" id="VBj-fF-j2E"/>
                                 </connections>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMY-Vx-R9i">
@@ -33,28 +34,35 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MRU-WG-Pfh">
-                                                <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="82.666666666666671" height="30"/>
                                                 <state key="normal" title="New Photo"/>
                                                 <connections>
                                                     <action selector="onNewPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dOj-GE-1zD"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1e-hu-rjH">
-                                                <rect key="frame" x="103.66666666666669" y="0.0" width="103.33333333333331" height="30"/>
+                                                <rect key="frame" x="82.666666666666671" y="0.0" width="83.000000000000014" height="30"/>
                                                 <state key="normal" title="Filter"/>
                                                 <connections>
                                                     <action selector="onFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Ry-3C-X5O"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hog-a6-ZQN">
-                                                <rect key="frame" x="206.99999999999997" y="0.0" width="103.66666666666666" height="30"/>
+                                                <rect key="frame" x="165.66666666666666" y="0.0" width="82.666666666666657" height="30"/>
                                                 <state key="normal" title="Compare"/>
                                                 <connections>
                                                     <action selector="onCompare:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hr5-VO-XJQ"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MUW-ja-fGd">
+                                                <rect key="frame" x="248.33333333333337" y="0.0" width="83" height="30"/>
+                                                <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="onEdit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yH3-Jt-aOS"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xIU-LI-ORP">
-                                                <rect key="frame" x="310.66666666666669" y="0.0" width="103.33333333333331" height="30"/>
+                                                <rect key="frame" x="331.33333333333331" y="0.0" width="82.666666666666686" height="30"/>
                                                 <state key="normal" title="Share"/>
                                                 <connections>
                                                     <action selector="onShare:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jaj-Pf-dxg"/>
@@ -152,11 +160,21 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVu-8x-coU">
-                                <rect key="frame" x="345" y="85" width="59" height="20"/>
+                                <rect key="frame" x="314" y="45" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Ia9-UQ-sSo"/>
+                                    <constraint firstAttribute="height" constant="100" id="neh-bb-m5W"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="YIK-7A-srr">
+                                <rect key="frame" x="-2" y="638" width="418" height="31"/>
+                                <connections>
+                                    <action selector="onSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="UvZ-jY-iCq"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -168,19 +186,33 @@
                             <constraint firstItem="DMY-Vx-R9i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W2a-bL-b4R"/>
                             <constraint firstItem="SVu-8x-coU" firstAttribute="centerY" secondItem="41g-vh-iY5" secondAttribute="centerY" id="aHb-cy-MdA"/>
                             <constraint firstItem="ucd-bC-QDv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ffB-xb-UIR"/>
+                            <constraint firstItem="SVu-8x-coU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="hZY-0G-GQW"/>
                             <constraint firstItem="DMY-Vx-R9i" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="iyM-QA-MW1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YIK-7A-srr" secondAttribute="trailing" id="kVU-eV-CEI"/>
+                            <constraint firstItem="YIK-7A-srr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kqv-WR-NFL"/>
                             <constraint firstItem="SVu-8x-coU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="65" id="lN0-nn-3Sk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SVu-8x-coU" secondAttribute="trailing" constant="10" id="svc-oK-Buz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SVu-8x-coU" secondAttribute="trailing" id="svc-oK-Buz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YIK-7A-srr" secondAttribute="bottom" constant="68" id="thf-nO-7Z9"/>
+                            <constraint firstItem="SVu-8x-coU" firstAttribute="centerY" secondItem="41g-vh-iY5" secondAttribute="centerY" id="u7v-UG-LhM"/>
                             <constraint firstItem="SVu-8x-coU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="vSN-MI-mJV"/>
                             <constraint firstItem="ucd-bC-QDv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zT7-vo-RqK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="aHb-cy-MdA"/>
+                                <exclude reference="lN0-nn-3Sk"/>
+                                <exclude reference="vSN-MI-mJV"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="ImageView" destination="ucd-bC-QDv" id="84y-0N-jBH"/>
                         <outlet property="OriginalLabel" destination="SVu-8x-coU" id="uZi-4Y-wf4"/>
                         <outlet property="bottomMenu" destination="DMY-Vx-R9i" id="f7M-gD-4uU"/>
                         <outlet property="compareButton" destination="hog-a6-ZQN" id="wJS-Z4-miq"/>
+                        <outlet property="editButton" destination="MUW-ja-fGd" id="IbO-HJ-y18"/>
+                        <outlet property="editSlider" destination="YIK-7A-srr" id="fcL-ZG-KJU"/>
                         <outlet property="filterButton" destination="n1e-hu-rjH" id="I4l-HI-vmu"/>
                         <outlet property="overallyImageview" destination="41g-vh-iY5" id="iYq-4q-Z43"/>
                         <outlet property="secondryMenu" destination="IXO-cl-NlV" id="8Hy-A4-f6S"/>
@@ -194,37 +226,37 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ohF-x3-WES">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8KU-50-Ek1">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8KU-50-Ek1">
                                     <rect key="frame" x="0.0" y="0.0" width="48" height="128"/>
-                                    <state key="normal" title="Rosay"/>
+                                    <state key="normal" title="Rosay" image="106"/>
                                     <connections>
                                         <action selector="onRosay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hNr-DJ-aa1"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZp-X0-bPi">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZp-X0-bPi">
                                     <rect key="frame" x="48" y="0.0" width="48" height="128"/>
-                                    <state key="normal" title="Greeny"/>
+                                    <state key="normal" title="Greeny" image="101"/>
                                     <connections>
                                         <action selector="onGreeny:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RgG-gl-7Aw"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFy-qm-b7x">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFy-qm-b7x">
                                     <rect key="frame" x="96" y="0.0" width="48" height="128"/>
-                                    <state key="normal" title="Browny"/>
+                                    <state key="normal" title="Browny" image="102"/>
                                     <connections>
                                         <action selector="onBrowny:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Lu-oh-E5p"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cg2-uN-I3j">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cg2-uN-I3j">
                                     <rect key="frame" x="144" y="0.0" width="48" height="128"/>
-                                    <state key="normal" title="Gray"/>
+                                    <state key="normal" title="Gray" image="104"/>
                                     <connections>
                                         <action selector="onGray:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qGC-1l-7Sh"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eas-eF-xSb">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eas-eF-xSb">
                                     <rect key="frame" x="192" y="0.0" width="48" height="128"/>
-                                    <state key="normal" title="Darkness"/>
+                                    <state key="normal" title="Darkness" image="105"/>
                                     <connections>
                                         <action selector="onBrightness:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A6u-qD-B3b"/>
                                     </connections>
@@ -246,11 +278,21 @@
                         <action selector="onTapWithRecognizer:" destination="BYZ-38-t0r" id="TM4-6y-hSO"/>
                     </connections>
                 </panGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.10000000000000001" id="bLr-We-qzO">
+                    <connections>
+                        <action selector="onTapWithRecognizer:" destination="BYZ-38-t0r" id="6IP-yA-mCV"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="133.33333333333334" y="132.88043478260872"/>
         </scene>
     </scenes>
     <resources>
+        <image name="101" width="100" height="100"/>
+        <image name="102" width="99" height="100"/>
+        <image name="104" width="99" height="100"/>
+        <image name="105" width="100" height="100"/>
+        <image name="106" width="100" height="100"/>
         <image name="sample" width="75" height="75"/>
     </resources>
 </document>
